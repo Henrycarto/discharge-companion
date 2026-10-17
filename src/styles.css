@@ -147,6 +147,8 @@ button, input { font: inherit; color: inherit; }
   .top { padding: 18px 16px 14px; }
   .qs { grid-template-columns: 1fr; }
   .slot { grid-template-columns: 1fr; gap: 6px; }
+  .slot li label { grid-template-columns: auto auto minmax(0, 1fr); }
+  .slot .lastone, .slot .tick { grid-column: 3; justify-self: start; }
   .foot { padding: 4px 16px 28px; }
 }
 
