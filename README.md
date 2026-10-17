@@ -1,5 +1,7 @@
 # Going home
 
+Live: https://discharge-companion-shelduckweb.vercel.app
+
 A discharge companion for Margarete Huber, the same fictional patient as the rest of the suite,
 on the day she leaves Ward 4B after pneumonia. Everything she needs for the next six weeks on
 one page: which tablets to take and when, what changed and why, when to get help, what recovery
