@@ -1,0 +1,179 @@
+@import '@fontsource/atkinson-hyperlegible-next/400.css';
+@import '@fontsource/atkinson-hyperlegible-next/500.css';
+@import '@fontsource/atkinson-hyperlegible-next/700.css';
+
+/* Same tokens as the ward monitor: white, one purple for interaction, amber and red only for clinical meaning. */
+:root {
+  --paper: #ffffff;
+  --ink: #1c1530;
+  --muted: #6e6880;
+  --faint: #a59fb3;
+  --rule: #e9e5ef;
+  --wash: #f7f5fa;
+  --night: #f9f7fb;
+  --brand: #53057f;
+  --brand-wash: #f3ebf8;
+  --brand-soft: #c9a6df;
+  --amber: #9a5b00;
+  --amber-wash: #fdf3e2;
+  --red: #c4122f;
+  --red-wash: #fdecee;
+  --on-brand: #ffffff;
+  --on-alarm: #ffffff;
+  --radius: 10px;
+  --scale: 1;
+  font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+  font-size: calc(17px * var(--scale));
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #15101f; --ink: #ece8f3; --muted: #a49db3; --faint: #6f6880; --rule: #2a2337; --wash: #1d1729; --night: #191322;
+    --brand: #c69be6; --brand-wash: #2a1a3a; --brand-soft: #6d4a8a; --amber: #e8a64a; --amber-wash: #2e2213;
+    --red: #ff6b7d; --red-wash: #3a1620; --on-brand: #15101f; --on-alarm: #15101f; color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --paper: #15101f; --ink: #ece8f3; --muted: #a49db3; --faint: #6f6880; --rule: #2a2337; --wash: #1d1729; --night: #191322;
+  --brand: #c69be6; --brand-wash: #2a1a3a; --brand-soft: #6d4a8a; --amber: #e8a64a; --amber-wash: #2e2213;
+  --red: #ff6b7d; --red-wash: #3a1620; --on-brand: #15101f; --on-alarm: #15101f; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); line-height: 1.45; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; border-radius: 6px; }
+.kicker { font-size: 0.8em; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.muted { color: var(--muted); }
+.btn { border: 1px solid var(--rule); background: var(--paper); border-radius: 10px; padding: 0.5em 0.9em; font-size: 0.9em; cursor: pointer; white-space: nowrap; min-height: 44px; }
+.btn:hover { border-color: var(--brand); }
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 12px; padding: 3px; gap: 2px; }
+.seg button { border: 0; background: none; border-radius: 9px; padding: 0.35em 0.8em; cursor: pointer; min-height: 40px; font-size: 0.9em; }
+.seg button.on { background: var(--brand); color: var(--on-brand); font-weight: 700; }
+
+.top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px 24px; padding: 24px 32px 18px; border-bottom: 1px solid var(--rule); flex-wrap: wrap; }
+.hello h1 { margin: 2px 0 0; font-size: 2.1em; line-height: 1.1; letter-spacing: -0.01em; }
+.hello p { margin: 4px 0 0; color: var(--muted); }
+.tools { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 18px; padding: 22px 32px; max-width: 1320px; margin: 0 auto; }
+.card { border: 1px solid var(--rule); border-radius: 16px; padding: 20px 22px; }
+.card h2 { margin: 0; font-size: 1.3em; }
+.head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; }
+.listen { border: 1px solid var(--rule); background: var(--paper); border-radius: 999px; padding: 0.3em 0.9em; font-size: 0.85em; cursor: pointer; min-height: 40px; }
+.listen[aria-pressed='true'] { background: var(--brand-wash); border-color: var(--brand); color: var(--brand); }
+.meds { grid-column: span 7; }
+.changed { grid-column: span 5; }
+.feeling { grid-column: span 7; }
+.expect { grid-column: span 5; }
+.next { grid-column: span 7; }
+.numbers { grid-column: span 5; }
+
+.days { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.days button { border: 1px solid var(--rule); background: var(--paper); border-radius: 12px; padding: 0.4em 0.85em; cursor: pointer; min-height: 44px; font-size: 0.95em; }
+.days button.on { background: var(--brand-wash); border-color: var(--brand); color: var(--brand); font-weight: 700; }
+.slot { display: grid; grid-template-columns: 7.5em 1fr; gap: 12px; padding: 12px 0; border-top: 1px solid var(--rule); }
+.slot .when b { display: block; font-size: 1.05em; }
+.slot .when span { color: var(--muted); }
+.slot ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.slot li label { display: grid; grid-template-columns: auto auto 1fr auto; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; background: var(--wash); cursor: pointer; }
+.slot li.done label { background: var(--brand-wash); }
+.slot input[type='checkbox'] { width: 1.5em; height: 1.5em; accent-color: var(--brand); }
+.slot .what { min-width: 0; overflow-wrap: anywhere; }
+.slot .what small { display: block; color: var(--muted); font-size: 0.85em; }
+.lastone { font-size: 0.8em; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: var(--brand); color: var(--on-brand); }
+.tick { font-size: 0.8em; font-weight: 700; color: var(--brand); }
+.slot li.done .lastone { display: none; }
+.pill { flex: none; }
+.pill.coamoxiclav { fill: var(--paper); stroke: var(--brand); stroke-width: 2.5; }
+.pill.atorvastatin { fill: var(--brand-soft); stroke: var(--brand); stroke-width: 2; }
+.pill.amlodipine { fill: var(--ink); opacity: 0.75; }
+.course { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--rule); display: grid; gap: 8px; }
+.bar { display: grid; grid-template-columns: repeat(11, 1fr); gap: 4px; }
+.bar i { height: 12px; border-radius: 6px; background: var(--rule); }
+.bar i.on { background: var(--brand); }
+.done-msg { color: var(--brand); }
+
+.change { padding: 10px 0; border-top: 1px solid var(--rule); }
+.change:first-of-type { border-top: 0; }
+.change h3 { margin: 0 0 6px; font-size: 0.8em; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.change.new h3 { color: var(--brand); }
+.cmed { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; overflow-wrap: anywhere; }
+.cmed p { margin: 4px 0 0; }
+.until { color: var(--ink); }
+
+.qs { list-style: none; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.qs label { display: flex; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--rule); cursor: pointer; min-height: 52px; }
+.qs input { width: 1.4em; height: 1.4em; accent-color: var(--brand); flex: none; }
+.qs li:has(input:checked) label { border-color: var(--brand); background: var(--brand-wash); }
+.advice { margin-top: 14px; padding: 16px 18px; border-radius: 14px; background: var(--wash); }
+.advice b { font-size: 1.2em; }
+.advice p { margin: 6px 0 0; }
+.advice.emergency { background: var(--red); color: var(--on-alarm); }
+.advice.urgent { background: var(--amber-wash); }
+.advice.urgent b { color: var(--amber); }
+.advice.expected { background: var(--brand-wash); }
+.callbtn { display: inline-grid; margin-top: 12px; padding: 10px 20px; border-radius: 12px; background: var(--paper); color: var(--ink); text-decoration: none; font-weight: 700; font-size: 1.3em; line-height: 1.1; }
+.callbtn small { font-size: 0.6em; font-weight: 400; color: var(--muted); }
+.advice.urgent .callbtn { background: var(--amber); color: var(--on-alarm); }
+.advice.urgent .callbtn small { color: var(--on-alarm); }
+
+.since { display: grid; gap: 6px; margin-bottom: 12px; }
+.since input { accent-color: var(--brand); width: 100%; }
+.milestones { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.milestones li { display: grid; grid-template-columns: 6.2em 1fr; gap: 4px 12px; }
+.milestones .by { font-weight: 700; grid-row: span 2; }
+.milestones .track { height: 8px; border-radius: 4px; background: var(--rule); overflow: hidden; }
+.milestones .track i { display: block; height: 100%; background: var(--brand-soft); }
+.milestones li.past .track i { background: var(--brand); }
+.milestones li.past .by { color: var(--brand); }
+.src { font-size: 0.8em; color: var(--muted); margin: 12px 0 0; }
+
+.next .big { font-size: 1.6em; font-weight: 700; margin: 8px 0 4px; color: var(--brand); }
+.next p { margin: 0; }
+.numbers ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 10px; }
+.numbers li { display: grid; grid-template-columns: 4em 1fr; gap: 10px; align-items: baseline; }
+.numbers a { color: var(--brand); text-decoration: none; font-size: 1.3em; }
+.numbers b { font-size: 1.2em; }
+.foot { padding: 4px 32px 32px; color: var(--muted); font-size: 0.8em; max-width: 1320px; margin: 0 auto; }
+
+@media (max-width: 980px) {
+  .grid { grid-template-columns: 1fr; padding: 16px; }
+  .meds, .changed, .feeling, .expect, .next, .numbers { grid-column: auto; }
+  .top { padding: 18px 16px 14px; }
+  .qs { grid-template-columns: 1fr; }
+  .slot { grid-template-columns: 1fr; gap: 6px; }
+  .foot { padding: 4px 16px 28px; }
+}
+
+@media print {
+  @page { size: A4 portrait; margin: 10mm; }
+  :root { --scale: 0.8 !important; }
+  .tools, .listen, .days, .since, .feeling .qs, .feeling .muted, .foot { display: none !important; }
+  .top { padding: 0 0 8px; }
+  .hello h1 { font-size: 1.7em; }
+  .grid { grid-template-columns: 1fr 1fr; grid-template-areas: 'meds changed' 'meds feeling' 'expect next' 'expect numbers'; gap: 8px; padding: 8px 0 0; align-items: start; }
+  .meds { grid-area: meds; }
+  .changed { grid-area: changed; }
+  .feeling { grid-area: feeling; }
+  .expect { grid-area: expect; }
+  .next { grid-area: next; }
+  .numbers { grid-area: numbers; }
+  .card { border-color: #999; border-radius: 10px; padding: 10px 12px; break-inside: avoid; }
+  .head { margin-bottom: 6px; }
+  .slot { padding: 8px 0; gap: 8px; }
+  .slot ul { gap: 6px; }
+  .slot li label { padding: 6px 8px; }
+  .course { margin-top: 8px; padding-top: 8px; }
+  .change { padding: 6px 0; }
+  .milestones { gap: 8px; }
+  .feeling .advice { display: none; }
+  .feeling::after { content: 'Call 144 for chest pain, severe breathlessness, confusion or blue lips. Call your GP or 1450 for fever, being sick, muscle pain, dizziness or a rash.'; display: block; font-size: 0.95em; }
+  html[lang='de-AT'] .feeling::after { content: 'Wählen Sie 144 bei Brustschmerzen, starker Atemnot, Verwirrtheit oder blauen Lippen. Rufen Sie Ihre Hausarztpraxis oder 1450 an bei Fieber, Erbrechen, Muskelschmerzen, Schwindel oder Ausschlag.'; }
+  body { background: #fff; color: #000; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
