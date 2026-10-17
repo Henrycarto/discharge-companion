@@ -1,6 +1,6 @@
 # Going home
 
-Live: https://discharge-companion-shelduckweb.vercel.app
+Live: https://discharge-companion-lovat.vercel.app
 
 A discharge companion for Margarete Huber, the same fictional patient as the rest of the suite,
 on the day she leaves Ward 4B after pneumonia. Everything she needs for the next six weeks on
